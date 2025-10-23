@@ -30,9 +30,11 @@ describe("Task Manager App", () => {
     const button = getByText("Add Task");
 
     fireEvent.change(input, { target: { value: "Walk the dog" } });
-    fireEvent.click(button);
+    
+    global.setFetchResponse({ id: 3, title: "Walk the dog", completed: false })
 
     await waitFor(() => {
+      fireEvent.click(button);
       expect(screen.getByText("Walk the dog")).toBeInTheDocument();
     });
   });
