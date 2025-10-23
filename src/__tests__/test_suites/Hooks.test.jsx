@@ -63,12 +63,7 @@ describe("Task Manager App", () => {
       </TaskProvider>
     );
     const button =  await findAllByTestId("1")
-    global.setFetchResponse([{
-        "id": 1,
-        "name": "Woody",
-        "image": "http://www.pngmart.com/files/3/Toy-Story-Woody-PNG-Photos.png",
-        "likes": 8
-    }])
+    global.setFetchResponse({ id: 1, title: "Buy groceries", completed: true })
     
     
     await waitFor(() => {
