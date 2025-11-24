@@ -133,3 +133,15 @@ Ensure the application:
 - Submits new task with `useId`
 - Marks tasks as complete.
 - Filters tasks shown on the page by a search input.
+
+## Updates
+
+### Implemented Features
+- Added global state management using React Context.
+- Implemented add, search, and toggle task completion functionality.
+- Ensured accessibility with proper label ↔ input linking.
+- All tests passed (`npm run test`).
+- Verified in the browser with mock backend (json-server).
+
+### Preview
+![Final Task Manager Screenshot](screenshot.png)
