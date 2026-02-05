@@ -11,7 +11,7 @@ function App() {
       .then(r => r.json())
       .then(data => setTasks(data))
 
-  }, []);
+  }, [setTasks]);
 
   return (
     <div>

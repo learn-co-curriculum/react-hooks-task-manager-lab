@@ -3,7 +3,7 @@ import { TaskContext } from "../context/TaskContext";
 
 function TaskForm() {
   const [taskName, setTaskName] = useState("");
-  const inputId = useId(null);
+  const inputId = useId();
   const { addTask } = useContext(TaskContext);
 
   function handleSubmit(e) {

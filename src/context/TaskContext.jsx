@@ -13,7 +13,7 @@ export function TaskProvider({ children }) {
         })
             .then(r => r.json())
             .then(updatedTask => {
-                setTasks(prev => prev.map(task => (task.id == id ? updatedTask : task)))
+                setTasks(prev => prev.map(task => (task.id === id ? updatedTask : task)))
             });
     }
 
