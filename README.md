@@ -133,3 +133,19 @@ Ensure the application:
 - Submits new task with `useId`
 - Marks tasks as complete.
 - Filters tasks shown on the page by a search input.
+
+
+
+After implementation, the Task Manager application successfully:
+
+Fetches tasks from the backend using useEffect
+
+Displays tasks using global state via useContext
+
+Adds new tasks with accessible form inputs using useId
+
+Toggles task completion and updates both the UI and backend
+
+Dynamically filters tasks using useRef
+
+Passes all provided test suites
