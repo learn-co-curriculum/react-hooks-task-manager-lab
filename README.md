@@ -1,135 +1,39 @@
-# Lab: Task Manager
+## Task Manager App
+This is a simple Task Manager application built using React. The app allows users to add tasks, mark tasks as complete, undo completed tasks, and search through tasks. It uses React Context for global state management and connects to a local db.json file using a JSON server.
 
-## Overview
-In this lab, we’ll build a Task Manager application that allows users to add, complete, and search tasks. Utilizing the hooks of `useRef` to persist values without re-rendering, `useId` to generate unique IDs for accessibility and controlled components, and `useContext` for global state management.
+## What The Project Does
+This project allows users to manage daily tasks in a simple and organized way. Users can add new tasks using the input form. When a task is added, it is saved to the database and immediately displayed on the screen.
 
-## Task 1: Define the Problem
-The frontend is set up, but the application lacks interactivity and state management.
+Users can mark a task as complete by clicking the complete button. When a task is completed, it gets a line-through style to show that it is done. The task status is also updated in the database.
 
-As a user, I should be able to:
-- Add a new task using a form (`useId`)
-- Mark tasks as completed (`useContext`)
-- Search tasks dynamically (`useRef`)
+Users can also undo a completed task. This changes the task back to incomplete and updates both the page and the database.
 
-## Task 2: Determine the Design
-Determine state and props needed for each component:
-- Global states (`useContext`)
-- Persistent Values (`useRef`)
-- Unique IDs (`useId`)
+The app includes a search feature. As the user types in the search bar, the task list automatically filters and only shows tasks that match the search text.
 
-## Task 3: Develop the Code
-### Implement Global State with `useContext`
-- Create `TaskProvider` as global state within `TaskContext.jsx`
-- Replace tasks state in app with context
+## Global State Management
+The project uses React’s useContext to manage global state.
 
-### Mark Task
-- Implement `toggleComplete` function within `TaskContext.jsx`
-- Call `toggleComplete` upon clicking task button
+A TaskProvider component is created inside TaskContext.jsx. This provider stores all tasks and shares them across the entire application.
 
-### Submit Tasks
-- Apply `useId` on form input
-- Implement `addTask` function within `TaskContext.jsx`
-- Call `addTask` within submit
+The following functions are handled inside the context:
 
-### Implement Search Functionality
-- Implement `useRef` on search input
-- Implement filter on task context
+# addTask – Adds a new task to the database and updates the page.
 
-## Task 4: Test and Refine
-Debug and test during development using the provided test suite and React DevTools in Chrome.
+# toggleComplete – Marks a task as complete or incomplete and updates the database.
 
-## Task 5: Document and Maintain
-- Commit as you go, writing meaningful commit messages
-- Push commit history to GitHub periodically and when lab is complete
+# tasks – Stores all tasks globally.
 
-## Tools and Resources
-- GitHub Repo: 
-- `useRef`: [React useRef](https://react.dev/reference/react/useRef)
-- `useContext`: [React useContext](https://react.dev/reference/react/useContext)
-- `useId`: [React useId](https://react.dev/reference/react/useId)
+The entire application is wrapped with TaskProvider inside main.jsx so that all components can access the global state.
 
-## Instructions
-### Set Up
-Before we begin coding, let's complete the initial setup for this lesson:
+## Features Implemented
+# Add Task
+Users can type a task into the input field and submit it. The app uses useId to properly connect the label and input. The task is saved to the database using a POST request and added to the global state.
 
-#### Fork and Clone
-- Go to the provided GitHub repository link.
-- Fork the repository to your GitHub account.
-- Clone the forked repository to your local machine.
+# Mark Task as Complete
+Users can click the complete button next to a task. The app sends a PATCH request to update the task’s completed status in the database. The UI updates immediately to reflect the change.
 
-#### Open and Run File
-- Open the project in VSCode.
-- Run `npm install` to install all necessary dependencies.
+# Undo Task
+If a task is already completed, clicking the button again will undo it. The task returns to normal styling and the database updates accordingly.
 
-## Instructions
-### Task 1: Define the Problem
-The frontend is set up, but the application lacks interactivity and state management.
-
-As a user, I should be able to:
-- Add a new task using a form (`useId`)
-- Mark tasks as completed (`useContext`)
-- Search tasks dynamically (`useRef`)
-
-### Task 2: Determine the Design
-Determine state and props needed for each component.
-
-### Task 3: Develop, Test, and Refine the Code
-#### Open React application in browser
-```sh
-npm run dev
-```
-
-#### Run the included backend
-```sh
-npm run server
-```
-
-#### Run test suite
-```sh
-npm run test
-```
-
-### Create feature branch
-#### Implement Global State with `useContext`
-- Create `TaskProvider` as global state within `TaskContext.jsx`
-- Replace tasks state in app with context
-- Update `App` within `main.jsx` to be wrapped in `TaskProvider`
-
-#### Mark Task
-- Implement `toggleComplete` function within `TaskContext.jsx`
-- Ensure `toggleComplete` function edits both the `db.json` and page
-- Call `toggleComplete` upon clicking task button
-
-#### Submit Tasks
-- Apply `useId` on form input
-- Implement `addTask` function within `TaskContext.jsx`
-- Call `addTask` within submit
-
-#### Implement Search Functionality
-- Implement `useRef` on search input
-- Implement filter task context on `TaskList`
-
-### Push feature branch and open a PR on GitHub
-- Merge to main
-
-## Task 4: Document and Maintain
-### Best Practice documentation steps:
-- Add comments to code to explain purpose and logic
-- Clarify intent/functionality of code to other developers
-- Add screenshot of completed work included in Markdown in `README.md`
-- Update `README.md` text to reflect the functionality of the application following [Make a README](https://makeareadme.com)
-- Delete any stale branches on GitHub
-- Remove unnecessary/commented-out code
-- If needed, update `.gitignore` to remove sensitive data
-
-## Submission
-Once all tests are passing and working code is pushed to the GitHub main branch, submit your GitHub repo through Canvas using CodeGrade.
-
-## Grading Criteria
-The application passes all test suites.
-
-Ensure the application:
-- Loads tasks with context.
-- Submits new task with `useId`
-- Marks tasks as complete.
-- Filters tasks shown on the page by a search input.
+Search Tasks
+Users can search tasks using the search bar. As they type, the app filters tasks in real time and only displays matching results.
