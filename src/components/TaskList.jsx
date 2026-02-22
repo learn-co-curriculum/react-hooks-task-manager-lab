@@ -1,25 +1,37 @@
-import React, { useContext,useState } from "react";
+import { useContext, useRef, useState, useEffect } from "react";
 import { TaskContext } from "../context/TaskContext";
+import TaskItem from "./TaskItem";
 
-function TaskList({query}) {
-    const [tasks, setTasks] = useState([]);
-    const filteredTasks = tasks.filter(task =>
-    task.title.toLowerCase().includes(query.toLowerCase())
+function TaskList() {
+  const { tasks } = useContext(TaskContext);
+  const searchRef = useRef();
+  const [search, setSearch] = useState("");
+
+  // Update search state when user types
+  useEffect(() => {
+    const input = searchRef.current;
+    function handleInput() {
+      setSearch(input.value);
+    }
+    input.addEventListener("input", handleInput);
+    return () => input.removeEventListener("input", handleInput);
+  }, []);
+
+  const filteredTasks = tasks.filter((task) =>
+    task.title.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
-    <ul>
+    <div>
+      <input
+        ref={searchRef}
+        placeholder="Search tasks..."
+        defaultValue=""
+      />
       {filteredTasks.map((task) => (
-        <li key={task.id}>
-          <span style={{ textDecoration: task.completed ? "line-through" : "none" }}>
-            {task.title}
-          </span>
-          <button data-testid={task.id}>
-            {task.completed ? "Undo" : "Complete"}
-          </button>
-        </li>
+        <TaskItem key={task.id} task={task} />
       ))}
-    </ul>
+    </div>
   );
 }
 
