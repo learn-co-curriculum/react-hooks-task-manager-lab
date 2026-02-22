@@ -1,23 +1,19 @@
-import React, { useEffect, useContext, useState } from "react";
-import { TaskContext } from "../context/TaskContext";
+import React, { useState } from "react";
 import TaskForm from "./TaskForm";
 import SearchBar from "./SearchBar";
+import TaskList from "./TaskList";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
-
-  useEffect(() => {
-    fetch('http://localhost:6001/tasks')
-    .then(r=>r.json())
-    .then(data=>setTasks(data))
-    
-  }, []);
+  const [query, setQuery] = useState("");
 
   return (
-    <div>
+    <div className="container">
       <h1>Task Manager</h1>
       <TaskForm />
-      <SearchBar />
+      <div className ="search-container">
+      <SearchBar setQuery={setQuery} />
+      </div>
+      <TaskList query={query} />
     </div>
   );
 }
