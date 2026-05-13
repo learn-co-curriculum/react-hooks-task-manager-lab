@@ -1,24 +1,24 @@
-import React, { useEffect, useContext, useState } from "react";
-import { TaskContext } from "../context/TaskContext";
-import TaskForm from "./TaskForm";
+import { useState } from "react";
 import SearchBar from "./SearchBar";
+import TaskForm from "./TaskForm";
+import TaskList from "./TaskList";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
-
-  useEffect(() => {
-    fetch('http://localhost:6001/tasks')
-    .then(r=>r.json())
-    .then(data=>setTasks(data))
-    
-  }, []);
+  const [searchTerm, setSearchTerm] = useState("");
 
   return (
-    <div>
+    <main>
       <h1>Task Manager</h1>
+
       <TaskForm />
-      <SearchBar />
-    </div>
+
+      <SearchBar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
+
+      <TaskList searchTerm={searchTerm} />
+    </main>
   );
 }
 
